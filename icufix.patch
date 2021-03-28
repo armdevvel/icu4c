@@ -1,0 +1,31 @@
+--- icudefs.mk	2021-03-28 16:05:28.621195089 -0400
++++ icudefs.mk	2021-03-28 16:05:23.097265532 -0400
+@@ -133,7 +133,7 @@
+ # CFLAGS is for C only flags
+ CFLAGS =  -O2 -std=c11 -Wall -pedantic -Wshadow -Wpointer-arith -Wmissing-prototypes -Wwrite-strings $(THREADSCFLAGS) 
+ # CXXFLAGS is for C++ only flags
+-CXXFLAGS =  -O2 -W -Wall -pedantic -Wpointer-arith -Wwrite-strings -Wno-long-long -std=c++11 $(THREADSCXXFLAGS) 
++CXXFLAGS =  -O2 -W -Wall -pedantic -Wpointer-arith -Wwrite-strings -Wno-long-long -std=c++11 $(THREADSCXXFLAGS)  
+ # CPPFLAGS is for C Pre-Processor flags
+ CPPFLAGS =  $(THREADSCPPFLAGS)  -DHAVE_DLOPEN=0 -DU_HAVE_MMAP=0 -DU_HAVE_STRTOD_L=0 -DU_HAVE_STRING_VIEW=1 
+ # LIBCFLAGS are the flags for static and shared libraries.
+@@ -286,14 +286,14 @@
+ LSTUBDIR	= -L$(top_builddir)/stubdata
+ LCTESTFW	= -L$(top_builddir)/tools/ctestfw
+ 
+-LIBICUDT	= $(LLIBDIR) $(LSTUBDIR) $(ICULIBS_DT)
+-LIBICUUC	= $(LLIBDIR) $(ICULIBS_UC) $(LSTUBDIR) $(ICULIBS_DT)
+-LIBICUI18N	= $(LLIBDIR) $(ICULIBS_I18N)
++LIBICUDT	= $(LLIBDIR) ../../stubdata/libsicudt.a
++LIBICUUC	= $(LLIBDIR) ../../lib/libsicuuc.a $(LSTUBDIR) ../../stubdata/libsicudt.a
++LIBICUI18N	= $(LLIBDIR) ../../lib/libsicuin.a
+ LIBICULE	= $(ICULEHB_CFLAGS) $(LLIBDIR) $(ICULIBS_LE)
+ LIBICULX	= $(LLIBDIR) $(ICULIBS_LX)
+ LIBCTESTFW	= $(LCTESTFW) $(ICULIBS_CTESTFW)
+-LIBICUTOOLUTIL	= $(LLIBDIR) $(ICULIBS_TOOLUTIL)
+-LIBICUIO	= $(LLIBDIR) $(ICULIBS_IO)
++LIBICUTOOLUTIL	= $(LLIBDIR) ../../lib/libsicutu.a
++LIBICUIO	= $(LLIBDIR) ../../lib/libsicuio.a
+ 
+ # Invoke, set library path for all ICU libraries.
+ # overridden by icucross.mk
